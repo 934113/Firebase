@@ -37,6 +37,9 @@ android {
 }
 
 dependencies {
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("com.google.firebase:firebase-firestore:25.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("com.google.firebase:firebase-firestore:25.0.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

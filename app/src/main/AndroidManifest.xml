@@ -17,6 +17,7 @@
             android:name=".AgregarGastoActivity"
             android:exported="false" />
         <!-- Login principal -->
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -29,6 +30,7 @@
         <activity android:name=".RegistroActivity" /> <!-- Recuperar contraseña -->
         <activity android:name=".RecuperarContrasenaActivity" /> <!-- Home -->
         <activity android:name=".InicioActivity" />
+
     </application>
 
 </manifest>

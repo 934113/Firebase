@@ -1,14 +1,15 @@
 package com.example.firebase;
+
+
 public class Gasto {
 
     private String titulo;
     private double monto;
     private String categoria;
     private String tipo;
-    private String fecha;
     private String usuarioId;
 
-    // Constructor vacío obligatorio para Firebase
+    // Constructor vacío obligatorio
     public Gasto() {
     }
 
@@ -16,16 +17,16 @@ public class Gasto {
                  double monto,
                  String categoria,
                  String tipo,
-                 String fecha,
                  String usuarioId) {
 
         this.titulo = titulo;
         this.monto = monto;
         this.categoria = categoria;
         this.tipo = tipo;
-        this.fecha = fecha;
         this.usuarioId = usuarioId;
     }
+
+    // GETTERS
 
     public String getTitulo() {
         return titulo;
@@ -43,11 +44,29 @@ public class Gasto {
         return tipo;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
     public String getUsuarioId() {
         return usuarioId;
+    }
+
+    // SETTERS
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setUsuarioId(String usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }
