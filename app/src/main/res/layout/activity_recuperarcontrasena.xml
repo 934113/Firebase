@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recuperar Contraseña"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#1A1A1A"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Te enviaremos un correo para restablecer tu contraseña."
+        android:textColor="#666666"
+        android:textAlignment="center"
+        android:layout_marginBottom="32dp"/>
+
+    <EditText
+        android:id="@+id/Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress"
+        android:padding="14dp"
+        android:background="@drawable/input"
+        android:layout_marginBottom="24dp"/>
+
+    <Button
+        android:id="@+id/EnviarEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar correo"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF"
+        android:padding="14dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/Login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="← Volver al Login"
+        android:textColor="#6200EE"
+        android:padding="4dp"/>
+
+</LinearLayout>
