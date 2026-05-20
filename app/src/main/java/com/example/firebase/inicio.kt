@@ -9,15 +9,23 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 
+
 class InicioActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var btnAgregarGasto: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
 
         auth = FirebaseAuth.getInstance()
+
+        btnAgregarGasto = findViewById(R.id.btnAgregarGasto)
+        btnAgregarGasto.setOnClickListener {
+            startActivity(Intent(this, AgregarGastoActivity::class.java))
+        }
+
 
         val UserEmail = findViewById<TextView>(R.id.UserEmail)
         val btnCerrarSesion = findViewById<Button>(R.id.btnCerrarSesion)
