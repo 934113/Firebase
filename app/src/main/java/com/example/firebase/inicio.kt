@@ -33,14 +33,24 @@ class InicioActivity : AppCompatActivity() {
 
         // Inicializar RecyclerView
         recyclerGastos = findViewById(R.id.recyclerGastos)
-        adapter = GastoAdapter(listaGastos)
+        
+        // Configurar el adapter con el callback de click para EDITAR
+        adapter = GastoAdapter(listaGastos) { gasto ->
+            val intent = Intent(this, AgregarGastoActivity::class.java).apply {
+                putExtra("documentId", gasto.documentId)
+                putExtra("titulo", gasto.titulo)
+                putExtra("monto", gasto.monto)
+                putExtra("categoria", gasto.categoria)
+                putExtra("tipo", gasto.tipo)
+            }
+            startActivity(intent)
+        }
+        
         recyclerGastos.layoutManager = LinearLayoutManager(this)
         recyclerGastos.adapter = adapter
 
         // Configurar Swipe to Delete
         configurarSwipeParaEliminar()
-
-        cargarGastos()
 
         // Botón agregar gasto
         btnAgregarGasto = findViewById(R.id.btnAgregarGasto)
@@ -58,18 +68,22 @@ class InicioActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        // Cargar/Refrescar gastos cada vez que la pantalla se vuelve visible
+        cargarGastos()
+    }
+
     private fun configurarSwipeParaEliminar() {
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
+            ): Boolean = false
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
+                val position = viewHolder.bindingAdapterPosition
                 confirmarEliminacion(position)
             }
         }
@@ -115,7 +129,7 @@ class InicioActivity : AppCompatActivity() {
     }
 
     private fun cargarGastos() {
-        val uid = auth.currentUser?.uid
+        val uid = auth.currentUser?.uid ?: return
 
         db.collection("gastos")
             .whereEqualTo("usuarioId", uid)
@@ -124,7 +138,7 @@ class InicioActivity : AppCompatActivity() {
                 listaGastos.clear()
                 for (documento in resultado) {
                     val gasto = documento.toObject(Gasto::class.java)
-                    gasto.documentId = documento.id // Asignar el ID de Firestore al objeto
+                    gasto.documentId = documento.id
                     listaGastos.add(gasto)
                 }
                 adapter.notifyDataSetChanged()
