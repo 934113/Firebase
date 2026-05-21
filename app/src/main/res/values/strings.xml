@@ -1,13 +1,45 @@
 <resources>
-    <string name="app_name">Firebase</string>
+    <string name="app_name">Control de Gastos</string>
+    <string name="default_web_client_id" translatable="false">TU_WEB_CLIENT_ID_AQUÍ</string>
+
     <string-array name="categorias">
-        <item>Comida</item>
+        <item>Alimentación</item>
         <item>Transporte</item>
-        <item>Entretenimiento</item>
-        <item>Hogar</item>
-        <item>Educación</item>
+        <item>Vivienda</item>
         <item>Salud</item>
+        <item>Educación</item>
+        <item>Entretenimiento</item>
+        <item>Servicios</item>
         <item>Otros</item>
     </string-array>
-</resources>
 
+    <!-- Dashboard -->
+    <string name="hola">Hola,</string>
+    <string name="balance_total">Balance Total</string>
+    <string name="ingresos">Ingresos</string>
+    <string name="gastos">Gastos</string>
+    <string name="resumen_mensual">Resumen Mensual</string>
+    <string name="gastos_fijos">Gastos Fijos</string>
+    <string name="gastos_libres">Gastos Libres</string>
+    <string name="ahorro_del_mes">Ahorro del Mes</string>
+    <string name="acciones_rapidas">Acciones Rápidas</string>
+    <string name="estadisticas">Estadísticas</string>
+    <string name="gastos_recientes">Gastos Recientes</string>
+    <string name="ver_todo">Ver todo</string>
+    <string name="nuevo_gasto">Nuevo Gasto</string>
+
+    <!-- Formularios -->
+    <string name="titulo_gasto_hint">¿En qué gastaste?</string>
+    <string name="monto_hint">Monto</string>
+    <string name="categoria_label">Categoría</string>
+    <string name="tipo_gasto_label">Tipo de Gasto</string>
+    <string name="guardar_gasto">Guardar Gasto</string>
+    <string name="fijo">Fijo</string>
+    <string name="libre">Libre</string>
+
+    <!-- Ingresos -->
+    <string name="mis_ingresos">Mis Ingresos</string>
+    <string name="descripcion_ingreso_hint">Descripción (ej. Sueldo)</string>
+    <string name="registrar_ingreso">Registrar Ingreso</string>
+    <string name="historial_ingresos">Historial de Ingresos</string>
+</resources>

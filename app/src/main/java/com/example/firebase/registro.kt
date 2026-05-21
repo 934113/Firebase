@@ -1,33 +1,27 @@
 package com.example.firebase
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.firebase.databinding.ActivityRegistroBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class RegistroActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityRegistroBinding
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registro)
+        binding = ActivityRegistroBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
 
-        val Email = findViewById<EditText>(R.id.Email)
-        val Password = findViewById<EditText>(R.id.Password)
-        val ConfirmPassword = findViewById<EditText>(R.id.ConfirmPassword)
-        val btnRegistro = findViewById<Button>(R.id.btnRegistro)
-        val Login = findViewById<TextView>(R.id.Login)
-
-        btnRegistro.setOnClickListener {
-            val email = Email.text.toString().trim()
-            val password = Password.text.toString().trim()
-            val confirm = ConfirmPassword.text.toString().trim()
+        binding.btnRegistro.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+            val confirm = binding.etConfirmPassword.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
                 Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
@@ -52,21 +46,17 @@ class RegistroActivity : AppCompatActivity() {
                     } else {
                         val errorMessage = when {
                             task.exception?.message?.contains("already in use") == true ->
-                                "Este correo ya está siendo utilizado, intenta con otro"
-
+                                "Este correo ya está siendo utilizado"
                             task.exception?.message?.contains("badly formatted") == true ->
-                                "El formato del correo no es válido, verifica que esté bien escrito"
-
-                            task.exception?.message?.contains("too many") == true ->
-                                "Demasiados intentos, intenta más tarde"
-
-                            else -> "Error al registrarse, verifica tus datos"
+                                "El formato del correo no es válido"
+                            else -> "Error al registrarse: ${task.exception?.message}"
                         }
                         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
                     }
                 }
         }
-        Login.setOnClickListener {
+        
+        binding.tvLogin.setOnClickListener {
             finish()
         }
     }

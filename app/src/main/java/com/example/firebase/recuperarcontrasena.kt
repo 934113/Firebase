@@ -1,29 +1,25 @@
 package com.example.firebase
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.firebase.databinding.ActivityRecuperarcontrasenaBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class RecuperarContrasenaActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityRecuperarcontrasenaBinding
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recuperarcontrasena)
+        binding = ActivityRecuperarcontrasenaBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
 
-        val Email = findViewById<EditText>(R.id.Email)
-        val EnviarEmail = findViewById<Button>(R.id.EnviarEmail)
-        val Login = findViewById<TextView>(R.id.Login)
-
-        EnviarEmail.setOnClickListener {
-            val email = Email.text.toString().trim()
+        binding.btnEnviarEmail.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
 
             if (email.isEmpty()) {
                 Toast.makeText(this, "Ingresa tu correo", Toast.LENGTH_SHORT).show()
@@ -41,7 +37,7 @@ class RecuperarContrasenaActivity : AppCompatActivity() {
                 }
         }
 
-        Login.setOnClickListener {
+        binding.tvBackToLogin.setOnClickListener {
             finish()
         }
     }

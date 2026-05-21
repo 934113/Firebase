@@ -13,23 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Firebase">
-        <activity
-            android:name=".AgregarGastoActivity"
-            android:exported="false" />
-        <!-- Login principal -->
 
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Registro -->
-        <activity android:name=".RegistroActivity" /> <!-- Recuperar contraseña -->
-        <activity android:name=".RecuperarContrasenaActivity" /> <!-- Home -->
-        <activity android:name=".InicioActivity" />
+        </activity>
+
+        <activity android:name=".InicioActivity" android:exported="false" />
+        <activity android:name=".RegistroActivity" android:exported="false" />
+        <activity android:name=".RecuperarContrasenaActivity" android:exported="false" />
+        <activity android:name=".AgregarGastoActivity" android:exported="false" />
+        <activity android:name=".IngresosActivity" android:exported="false" />
+        <activity android:name=".EstadisticasActivity" android:exported="false" />
 
     </application>
 

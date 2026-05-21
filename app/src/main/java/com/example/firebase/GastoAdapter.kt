@@ -1,36 +1,40 @@
 package com.example.firebase
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.firebase.databinding.ItemGastoBinding
+import java.util.*
 
 class GastoAdapter(
     private val listaGastos: List<Gasto>,
-    private val onItemClick: (Gasto) -> Unit // Callback para el click
+    private val onItemClick: (Gasto) -> Unit
 ) : RecyclerView.Adapter<GastoAdapter.GastoViewHolder>() {
 
-    class GastoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvTitulo: TextView = itemView.findViewById(R.id.tvTitulo)
-        val tvCategoria: TextView = itemView.findViewById(R.id.tvCategoria)
-        val tvMonto: TextView = itemView.findViewById(R.id.tvMonto)
-    }
+    class GastoViewHolder(val binding: ItemGastoBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GastoViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_gasto, parent, false)
-        return GastoViewHolder(view)
+        val binding = ItemGastoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return GastoViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: GastoViewHolder, position: Int) {
         val gasto = listaGastos[position]
-        holder.tvTitulo.text = gasto.titulo
-        holder.tvCategoria.text = gasto.categoria
-        holder.tvMonto.text = "$${gasto.monto}"
+        with(holder.binding) {
+            tvTitulo.text = gasto.titulo
+            tvCategoria.text = gasto.categoria
+            tvMonto.text = String.format(Locale.getDefault(), "$%.2f", gasto.monto)
+            
+            val context = root.context
+            val colorRes = if (gasto.tipo == "Fijo") {
+                android.R.color.holo_red_dark
+            } else {
+                android.R.color.holo_orange_dark
+            }
+            tvMonto.setTextColor(ContextCompat.getColor(context, colorRes))
 
-        holder.itemView.setOnClickListener {
-            onItemClick(gasto)
+            root.setOnClickListener { onItemClick(gasto) }
         }
     }
 
