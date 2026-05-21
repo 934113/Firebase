@@ -1,8 +1,10 @@
 package com.example.firebase;
 
+import com.google.firebase.firestore.Exclude;
 
 public class Gasto {
 
+    private String documentId; // Nuevo campo para el ID de Firestore
     private String titulo;
     private double monto;
     private String categoria;
@@ -24,6 +26,16 @@ public class Gasto {
         this.categoria = categoria;
         this.tipo = tipo;
         this.usuarioId = usuarioId;
+    }
+
+    // GETTERS Y SETTERS PARA documentId (Excluido de Firestore al subir)
+    @Exclude
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     // GETTERS
