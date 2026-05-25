@@ -18,6 +18,7 @@ class IngresosActivity : AppCompatActivity() {
     private lateinit var adapter: IngresoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityIngresosBinding.inflate(layoutInflater)
         setContentView(binding.root)
