@@ -51,7 +51,12 @@ class IngresosActivity : AppCompatActivity() {
             return
         }
 
-        val monto = montoTexto.toDoubleOrNull() ?: 0.0
+        val monto = montoTexto.toDoubleOrNull()
+
+        if (monto == null || monto <= 0) {
+            Toast.makeText(this, "Ingresa un monto válido", Toast.LENGTH_SHORT).show()
+            return
+        }
         val usuarioId = auth.currentUser?.uid ?: return
 
         val nuevoIngreso = Ingreso(
@@ -75,23 +80,37 @@ class IngresosActivity : AppCompatActivity() {
     }
 
     private fun cargarIngresos() {
-        val uid = auth.currentUser?.uid ?: return
+
+        val uid = auth.currentUser?.uid
+
+        if (uid == null) {
+            Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        android.util.Log.d("UID_ACTUAL", uid)
 
         db.collection("ingresos")
             .whereEqualTo("usuarioId", uid)
-            .orderBy("fecha", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { resultado ->
+
                 listaIngresos.clear()
+
                 for (doc in resultado) {
+
+                    android.util.Log.d("INGRESO_FIREBASE", doc.data.toString())
+
                     val ingreso = doc.toObject(Ingreso::class.java)
                     ingreso.documentId = doc.id
                     listaIngresos.add(ingreso)
                 }
+
                 adapter.notifyDataSetChanged()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                android.util.Log.e("FIREBASE_ERROR", e.message ?: "error")
+                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
             }
     }
 }
